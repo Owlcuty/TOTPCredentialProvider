@@ -24,7 +24,7 @@ enum SAMPLE_FIELD_ID
     SFI_HAS_TOTPCREDS     ,//= 3
     SFI_PASSWORD          ,//= 4,
     SFI_SUBMIT_BUTTON     ,//= 5,
-    //SFI_SHOWCREDS_LINK    ,//= 6,
+    SFI_SHOWCREDS_LINK    ,//= 6,
     SFI_TOTP_EMAIL        ,//= 7,
     SFI_TOTP_PASSWORD     ,//= 8
     SFI_NUM_FIELDS        ,//= 9,  // Note: if new fields are added, keep NUM_FIELDS last.  This is used as a count of the number of fields
@@ -53,9 +53,9 @@ static const FIELD_STATE_PAIR s_rgFieldStatePairs[] =
     { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_HAS_TOTPCREDS
     { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_FOCUSED },    // SFI_PASSWORD
     { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_SUBMIT_BUTTON
-    //{ CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_SHOWCREDS_LINK
-    { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_TOTP_EMAIL
-    { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_TOTP_PASSWORD
+    { CPFS_DISPLAY_IN_SELECTED_TILE,   CPFIS_NONE    },    // SFI_SHOWCREDS_LINK
+    { CPFS_HIDDEN,                     CPFIS_NONE    },    // SFI_TOTP_EMAIL
+    { CPFS_HIDDEN,                     CPFIS_NONE    },    // SFI_TOTP_PASSWORD
 };
 
 // Field descriptors for unlock and logon.
@@ -69,8 +69,8 @@ static const CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR s_rgCredProvFieldDescriptors[]
     { SFI_LARGE_TEXT,        CPFT_LARGE_TEXT,    L"TOTP Credential Provider"                                   },
     { SFI_HAS_TOTPCREDS,     CPFT_LARGE_TEXT,    L""                                                           },
     { SFI_PASSWORD,          CPFT_PASSWORD_TEXT, L"Password"                                                   },
-    //{ SFI_SHOWCREDS_LINK,    CPFT_COMMAND_LINK,  L"Show TOTP Credentials"                                      },
     { SFI_SUBMIT_BUTTON,     CPFT_SUBMIT_BUTTON, L"Submit"                                                     },
+    { SFI_SHOWCREDS_LINK,    CPFT_COMMAND_LINK,  L"Show TOTP Credentials"                                      },
     { SFI_TOTP_EMAIL,        CPFT_EDIT_TEXT,     L"Email TOTP"                                                 },
     { SFI_TOTP_PASSWORD,     CPFT_PASSWORD_TEXT, L"Password TOTP"                                              }
 };

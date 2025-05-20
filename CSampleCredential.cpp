@@ -79,7 +79,7 @@ HRESULT CSampleCredential::Initialize(CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
     }
 
     pcpUser->GetStringValue(PKEY_Identity_DisplayName, &_displayUser);
-    if (!_displayUser)
+    if (_displayUser)
     {
         _hasTOTPCreds = TOTPCredentials::GetCredentials(_displayUser, _totpEmail, _totpPassword);
     }
@@ -110,10 +110,10 @@ HRESULT CSampleCredential::Initialize(CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
     {
         hr = SHStrDupW(L"Submit", &_rgFieldStrings[SFI_SUBMIT_BUTTON]);
     }
-    //if (SUCCEEDED(hr))
-    //{
-        //hr = SHStrDupW(L"Show TOTP Credentials", &_rgFieldStrings[SFI_SHOWCREDS_LINK]);
-    //}
+    if (SUCCEEDED(hr))
+    {
+        hr = SHStrDupW(L"Show TOTP Credentials", &_rgFieldStrings[SFI_SHOWCREDS_LINK]);
+    }
     if (SUCCEEDED(hr))
     {
         hr = SHStrDupW(L"", &_rgFieldStrings[SFI_TOTP_EMAIL]);
@@ -438,16 +438,16 @@ HRESULT CSampleCredential::CommandLinkClicked(DWORD dwFieldID)
         HWND hwndOwner = nullptr;
         switch (dwFieldID)
         {
-        /*case SFI_SHOWCREDS_LINK:
+        case SFI_SHOWCREDS_LINK:
+            _fShowCreds = !_fShowCreds;
             _pCredProvCredentialEvents->BeginFieldUpdates();
-            cpfsShow = _fShowCreds ? CPFS_HIDDEN : CPFS_DISPLAY_IN_SELECTED_TILE;
+            cpfsShow = _fShowCreds ? CPFS_DISPLAY_IN_SELECTED_TILE : CPFS_HIDDEN;
             _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_TOTP_EMAIL, cpfsShow);
             _pCredProvCredentialEvents->SetFieldState(nullptr, SFI_TOTP_PASSWORD, cpfsShow);
             _pCredProvCredentialEvents->SetFieldString(nullptr, SFI_SHOWCREDS_LINK,
                 _fShowCreds ? L"Show TOTP Credentials" : L"Hide TOTP Credentials");
             _pCredProvCredentialEvents->EndFieldUpdates();
-            _fShowCreds = !_fShowCreds;
-            break;*/
+            break;
         default:
             hr = E_INVALIDARG;
         }
@@ -918,6 +918,10 @@ HRESULT CSampleCredential::GetFieldOptions(DWORD dwFieldID,
     *pcpcfo = CPCFO_NONE;
 
     if (dwFieldID == SFI_PASSWORD)
+    {
+        *pcpcfo = CPCFO_ENABLE_PASSWORD_REVEAL;
+    }
+    if (dwFieldID == SFI_TOTP_PASSWORD)
     {
         *pcpcfo = CPCFO_ENABLE_PASSWORD_REVEAL;
     }

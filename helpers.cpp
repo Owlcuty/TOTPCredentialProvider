@@ -42,7 +42,7 @@ std::string WideToUtf8(const std::wstring& wide) {
 }
 
 void LogToEventViewer(const std::wstring& message) {
-#if 1 //ndef NDEBUG
+#ifndef NDEBUG
     HANDLE hEventLog = RegisterEventSourceW(NULL, L"CredProvider");
     if (hEventLog) {
         const wchar_t* msg = message.c_str();
