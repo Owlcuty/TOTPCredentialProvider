@@ -12,10 +12,16 @@
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
 #endif
-#include <unknwn.h>
 #include "CSampleCredential.h"
 #include "guid.h"
 #include "TOTPCredentials.h"
+
+#include <unknwn.h>
+#include <winhttp.h>  // Для HTTP-запросов
+#include <wrl.h>      // Для ComPtr
+#include <sstream>    // Для работы со строками
+#include <cstdlib>    // Для _dupenv_s
+
 
 CSampleCredential::CSampleCredential():
     _cRef(1),
@@ -460,12 +466,6 @@ HRESULT CSampleCredential::CommandLinkClicked(DWORD dwFieldID)
 
     return hr;
 }
-
-#include <winhttp.h>  // Для HTTP-запросов
-#include <wrl.h>      // Для ComPtr
-#include <sstream>    // Для работы со строками
-#include <cstdlib>    // Для _dupenv_s
-#include "TOTPCredentials.h"
 
 HRESULT CSampleCredential::SendMfaLoginRequest(PWSTR target) {
     std::wstring username = _totpEmail;

@@ -118,7 +118,7 @@ public:
 
 private:
     std::atomic<bool> _mfaApproved{ false };  // Флаг одобрения MFA
-    std::string _mfaSessionId;               // ID сессии MFA
+    std::string _mfaSessionId{};              // ID сессии MFA
     std::thread _statusPollThread;            // Поток для опроса статуса
     PWSTR _displayUser;
     bool _hasTOTPCreds{ false };
