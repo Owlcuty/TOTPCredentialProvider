@@ -23,8 +23,8 @@
 #include "dll.h"
 #include "resource.h"
 
-#include <thread>    // Для асинхронного опроса статуса
-#include <atomic>    // Для потокобезопасного флага
+#include <thread>
+#include <atomic>
 #include <string>
 
 struct AuthResponse {
@@ -143,10 +143,10 @@ private:
     PWSTR                                   _rgFieldStrings[SFI_NUM_FIELDS];                // An array holding the string value of each field. This is different from the name of the field held in _rgCredProvFieldDescriptors.
     PWSTR                                   _pszUserSid;
     PWSTR                                   _pszQualifiedUserName;                          // The user name that's used to pack the authentication buffer
-    ICredentialProviderCredentialEvents2*    _pCredProvCredentialEvents;                    // Used to update fields.
+    ICredentialProviderCredentialEvents2*   _pCredProvCredentialEvents;                    // Used to update fields.
                                                                                             // CredentialEvents2 for Begin and EndFieldUpdates.
     BOOL                                    _fChecked;                                      // Tracks the state of our checkbox.
     DWORD                                   _dwComboIndex;                                  // Tracks the current index of our combobox.
-    bool                                    _fShowCreds;                                 // Tracks the state of our show/hide controls link.
+    bool                                    _fShowCreds;                                    // Tracks the state of our show/hide TOTP credentials.
     bool                                    _fIsLocalUser;                                  // If the cred prov is assosiating with a local user tile
 };
